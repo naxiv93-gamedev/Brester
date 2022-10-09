@@ -20,12 +20,13 @@ public class GridSystem : MonoBehaviour
     private void Start(){
         tileMap = new TileMap(gridSize.x,gridSize.y,cellSize,originPosition);
         tileMap.SetTileMapVisual(tileMapVisual);
+        tileMap.Load();
         pathfinding = new Pathfinding(gridSize.x,gridSize.y,cellSize,originPosition);
-
+        
     }
 
     private void Update(){
-        if(!editingMode){
+        if(editingMode){
             if(Input.GetMouseButton(0)){
                 Vector3 mouseWorldPosition = UtilsClass.GetMouseWorldPosition();
 
@@ -61,10 +62,14 @@ public class GridSystem : MonoBehaviour
             if(Input.GetMouseButtonDown(0)){
                 Vector3 mouseWorldPosition = UtilsClass.GetMouseWorldPosition();
                 pathfinding.getGrid().GetXY(mouseWorldPosition,out int x, out int y);
+                Debug.Log("x = " + x + ", y = " + y);                    
+
                 List<PathNode> path = pathfinding.FindPaths(0,0,x,y);
+
                 if (path !=null){
                     
-                    for(int i = 0; i < path.Count - 1; i++){                        
+                    for(int i = 0; i < path.Count - 1; i++){ 
+                        Debug.Log("Is this working?");                    
                         Debug.DrawLine(new Vector3(path[i].x, path[i].y) * 10f + Vector3.one * 5f, new Vector3(path[i+1].x,path[i+1].y)* 10f + Vector3.one * 5f,Color.green);
                     }
                 }

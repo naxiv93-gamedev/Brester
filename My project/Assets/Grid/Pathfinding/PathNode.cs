@@ -5,8 +5,8 @@ using UnityEngine;
 public class PathNode
 {
     private Grid<PathNode> grid;
-    public int x;
-    public int y;
+    private int x;
+    private int y;
 
     public int gCost;
     public int hCost;
@@ -25,8 +25,5 @@ public class PathNode
     public override string ToString()
     {
         return x + "," + y;
-    }
-    public Vector2Int getCoords(){
-        return new Vector2Int(x,y);
     }
 }

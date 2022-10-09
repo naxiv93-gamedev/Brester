@@ -15,7 +15,7 @@ public class TileMap
 
     public void SetTileMapSprite(Vector3 worldPosition, TileMapObject.TileMapSprite tileMapSprite){
         TileMapObject tileMapObject = grid.GetGridObject(worldPosition);
-        if(tileMapObject != null){
+        if(tileMapObject != null || tileMapObject.GetTileMapSprite() != tileMapSprite){
             tileMapObject.SetTileMapSprite(tileMapSprite);
         }
     }

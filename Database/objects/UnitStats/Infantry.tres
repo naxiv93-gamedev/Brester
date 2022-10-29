@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Database/classes/UnitStats.gd" type="Script" id=1]
+[ext_resource path="res://Database/objects/Weapons/InfantryMachineGun.tres" type="Resource" id=2]
+
+[resource]
+script = ExtResource( 1 )
+unit_name = ""
+mainWeapon = ExtResource( 2 )
+movementType = 0
+movement_range = 3
+vision_range = 3
+canCapture = true
+canRestock = false
+canCarry = false
+max_units_carry = 0
+max_fuel = 99
+cost = 0
+info = ""

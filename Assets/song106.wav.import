@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/song106.wav-209a8a90127a59b85325232a8285d9a0.sample"
+
+[deps]
+
+source_file="res://Assets/song106.wav"
+dest_files=[ "res://.import/song106.wav-209a8a90127a59b85325232a8285d9a0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

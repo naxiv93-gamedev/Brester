@@ -9,6 +9,6 @@ func _ready():
 func switchSelectedTile(oldTile,newTile):
 	stream = cursorMove
 	play()
-func cellSelected(cell):
+func cellSelected():
 	stream = accept
 	play()

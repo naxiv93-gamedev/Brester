@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Database/classes/UnitStats.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+unit_name = ""
+movementType = 0
+movement_range = 3
+vision_range = 1
+canCapture = false
+canRestock = false
+canCarry = false
+max_units_carry = 0
+max_fuel = 99
+cost = 0
+info = ""

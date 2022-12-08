@@ -16,7 +16,7 @@ func init(spriteSize):
 	$HighlightAnimationPlayer.play("highlight")
 
 
-func _on_TileManager_switchedTileHighlight(newTile):
+func switchTileHighlight(newTile):
 	$Tween.interpolate_property(self,"position",self.position,newTile*spriteSize,.15,Tween.TRANS_CIRC,Tween.EASE_OUT)
 	$Tween.start()
 

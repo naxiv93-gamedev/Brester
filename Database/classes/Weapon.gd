@@ -1,5 +1,7 @@
 extends Resource
 
+class_name Weapon
+
 export (String) var name = ""
 export (int, 1, 10) var minRange = 1
 export (int, 1, 10) var maxRange = 1

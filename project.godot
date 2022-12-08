@@ -10,14 +10,39 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
+"class": "Enums",
+"language": "GDScript",
+"path": "res://Singletons/Enums.gd"
+}, {
+"base": "Reference",
 "class": "Pathfinding",
 "language": "GDScript",
 "path": "res://Tile/Pathfinding.gd"
 }, {
 "base": "Resource",
+"class": "RuntimeData",
+"language": "GDScript",
+"path": "res://Resources/runtime_data.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://Resources/StateMachine/State.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://Resources/StateMachine/StateMachine.gd"
+}, {
+"base": "Resource",
 "class": "Structure",
 "language": "GDScript",
 "path": "res://Database/classes/Structure.gd"
+}, {
+"base": "Node2D",
+"class": "Unit",
+"language": "GDScript",
+"path": "res://Unit/Unit.gd"
 }, {
 "base": "Reference",
 "class": "UnitPath",
@@ -28,19 +53,30 @@ _global_script_classes=[ {
 "class": "UnitStats",
 "language": "GDScript",
 "path": "res://Database/classes/UnitStats.gd"
+}, {
+"base": "Resource",
+"class": "Weapon",
+"language": "GDScript",
+"path": "res://Database/classes/Weapon.gd"
 } ]
 _global_script_class_icons={
+"Enums": "",
 "Pathfinding": "",
+"RuntimeData": "",
+"State": "",
+"StateMachine": "",
 "Structure": "",
+"Unit": "",
 "UnitPath": "",
-"UnitStats": ""
+"UnitStats": "",
+"Weapon": ""
 }
 
 [application]
 
 config/name="BresterConflict"
 run/main_scene="res://Map.tscn"
-config/icon="res://icon.png"
+config/icon="res://addons/State/icon.png"
 
 [autoload]
 
@@ -63,9 +99,9 @@ action=false
 
 ui_accept={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777222,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777222,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]

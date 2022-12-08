@@ -1,10 +1,10 @@
 extends Node2D
 
+export(Resource) var runtimeData = runtimeData as RuntimeData
 
 var stats : Resource
-var structure : Resource = null
+var structure : Structure = null
 var pathfinding = Pathfinding.new(self)
-
 var occupant
 var cost = 1
 
@@ -39,32 +39,31 @@ func addNeighbors(tileDict):
 
 func select(oldTile):
 	if $RangeSprite.visible:
-		print("G List: " + str(pathfinding.getGList(self).getList()))
-		print("Custom List: " + str(pathfinding.getCustomList(self).getList()))
 		GameEvents.emit_signal("drawPath",pathfinding.getCustomList(self))
-		#GameEvents.emit_signal("drawPath",pathfinding.getGList(self))
 
 func unselect(newTile):
 	if $RangeSprite.visible:
 		pathfinding.goingTo = newTile
 
-func activate():
-	
-	#Here a signal will be emitted depending on the conditions and the tile 
-	
-	if structure != null:
-		structure.activate(getPosition())
-	elif occupant != null:
-		print(name + "'s occupant has been activated!")
-		GameEvents.emit_signal("clearGData")
-		pathfinding.startG(occupant.stats.movement_range,1)
-		print("G List: " + str(pathfinding.getGList(self)))
-		print("Custom List: " + str(pathfinding.getCustomList(self).getList()))
-		GameEvents.emit_signal("drawPath",pathfinding.getCustomList(self))
-		#GameEvents.emit_signal("drawPath",pathfinding.getGList(self))
+func idle():
+		if occupant:
+			GameEvents.emit_signal("foundOccupant",self,occupant)
+
+		elif structure:
+			structure.activate(getPosition())
+		else:
+			print(name + " has been activated!")
+func movement():
+	if isInRange():
+		if occupant:
+			GameEvents.emit_signal("foundOccupant",self,occupant)
+		else:
+			GameEvents.emit_signal("suitableCell",self)
 	else:
-		print(name + " has been activated!")
-		
+		GameEvents.emit_signal("cancelMovement")
+
+			
+
 
 func addStructure(structure):
 	structure = load("res://Database/objects/Structures/Factory.tres")
@@ -84,3 +83,16 @@ func inRange():
 
 func noRange():
 	$RangeSprite.visible = false
+
+func getNeighborEnemies():
+	var neighborEnemies = []
+	for neighbor in pathfinding.neighbors:
+		if neighbor.occupant:
+			neighborEnemies.append(neighbor)
+	return neighborEnemies
+
+func hasNeighborEnemies():
+	return getNeighborEnemies().size() != 0
+func hasCapturableBase():
+	return structure
+

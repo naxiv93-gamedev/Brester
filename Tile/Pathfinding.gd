@@ -21,14 +21,16 @@ func startG(unitRange, unitMoveType):
 		neighbor.pathfinding.getG(tile, unitRange,unitMoveType)
 
 func getG(possibleParent,unitRange,unitMoveType):
-	var parentG  = possibleParent.pathfinding.G
-	var projectedG = parentG + getMovementCost(unitMoveType)
-	#if we haven't stepped here, or movement is cheaper...
-	if G == -1 or projectedG < G:
-		assignG(possibleParent,projectedG)
-		if G < unitRange:
-			for neighbor in neighbors:
-				neighbor.pathfinding.getG(tile,unitRange,unitMoveType)
+	if !tile.occupant:
+		var parentG  = possibleParent.pathfinding.G
+		var projectedG = parentG + getMovementCost(unitMoveType)
+		#if we haven't stepped here, or movement is cheaper...
+		if G == -1 or projectedG < G:
+			assignG(possibleParent,projectedG)
+			if G < unitRange:
+				for neighbor in neighbors:
+					neighbor.pathfinding.getG(tile,unitRange,unitMoveType)
+
 func assignG(newParent,newG):
 	G = newG
 	parent = newParent
@@ -67,7 +69,7 @@ func getCustomList(tile):
 			list.add(nextTile)
 	else:
 		return revertToGList(list,glist)
-	print(glist.getTotalCost())
+	
 	if glist.getEnd() != list.getEnd() or list.getTotalCost() > list.getOrigin().occupant.stats.movement_range:
 		return revertToGList(list,glist)
 		
@@ -81,4 +83,3 @@ func revertToGList(list,glist):
 	for tile in glist.getList():
 		tile.pathfinding.goingTo = glist.getNext(tile)
 	return glist
-	

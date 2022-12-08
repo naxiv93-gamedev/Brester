@@ -19,6 +19,7 @@ enum RoutePoints{
 }
 func _ready():
 	GameEvents.connect("drawPath",self,"drawPath")
+	GameEvents.connect("clearGData",self,"wipePath")
 func drawPath(list):
 	for cell in get_used_cells():
 		set_cellv(cell,-1)
@@ -65,3 +66,6 @@ func drawPath(list):
 						
 		set_cellv(tile.getPosition(),coord)
 		update_dirty_quadrants()
+func wipePath():
+	for cell in get_used_cells():
+		set_cellv(cell,-1)

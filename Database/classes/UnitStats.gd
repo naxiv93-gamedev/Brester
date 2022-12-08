@@ -4,13 +4,13 @@ class_name UnitStats
 
 export (String) var unit_name = ""
 
-export (Resource) var mainWeapon
-export (Resource) var secondaryWeapon
+export (Resource) onready var mainWeapon = mainWeapon as Weapon
+export (Resource) onready var secondaryWeapon = secondaryWeapon as Weapon
 
 enum MovementTypes {Infantry, MechInfantry, Wheels, Chains, Air, Sea}
 export(MovementTypes) var movementType = MovementTypes.Infantry
 
-export (int, 1, 10) var movement_range = 1
+export (int, 1, 10) var movement_range = 3
 export (int, 1, 10) var vision_range = 1
 
 export (bool) var canCapture = false

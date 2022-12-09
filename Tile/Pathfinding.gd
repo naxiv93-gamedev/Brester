@@ -69,8 +69,8 @@ func getCustomList(tile):
 			list.add(nextTile)
 	else:
 		return revertToGList(list,glist)
-	
-	if glist.getEnd() != list.getEnd() or list.getTotalCost() > list.getOrigin().occupant.stats.movement_range:
+	var stats = list.getOrigin().occupant.stats
+	if glist.getEnd() != list.getEnd() or list.getTotalCost() > stats.movement_range:
 		return revertToGList(list,glist)
 		
 	return list

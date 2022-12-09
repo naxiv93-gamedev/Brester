@@ -3,11 +3,13 @@ extends State
 var occupant 
 var originCell
 func _ready():
-
+	
 	GameEvents.connect("cancelMovement",self,"cancelMovement")
 	GameEvents.connect("suitableCell", self,"suitableCell")
 func newState():
 	GameEvents.emit_signal("clearGData")
+	print(occupant)
+	print(originCell)
 	originCell.occupant = occupant
 	originCell.pathfinding.startG(occupant.stats.movement_range,1)
 	GameEvents.emit_signal("drawPath",originCell.pathfinding.getCustomList(originCell))
@@ -32,6 +34,7 @@ func suitableCell(cell):
 	emit_signal("switchState","Moving")
 
 func _on_Idle_sendCellData(cell, occupant):
+	print("Ima sending ma signal")
 	self.originCell = cell
 	self.occupant = occupant
 

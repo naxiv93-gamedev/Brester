@@ -7,7 +7,8 @@ var structure : Structure = null
 var pathfinding = Pathfinding.new(self)
 var occupant
 var cost = 1
-
+var mapPos
+var isOccupantFromActivePlayer = false
 func init(tile):
 		var size = $Sprite.texture.get_size()
 		self.position = (tile * size) + (size/2)
@@ -48,7 +49,6 @@ func unselect(newTile):
 func idle():
 		if occupant:
 			GameEvents.emit_signal("foundOccupant",self,occupant)
-
 		elif structure:
 			structure.activate(getPosition())
 		else:
@@ -64,7 +64,10 @@ func movement():
 
 			
 
-
+func combat():
+	if isInRange():
+		GameEvents.emit_signal("validCombatTile", self)
+		
 func addStructure(structure):
 	structure = load("res://Database/objects/Structures/Factory.tres")
 	self.structure = structure
@@ -88,7 +91,12 @@ func getNeighborEnemies():
 	var neighborEnemies = []
 	for neighbor in pathfinding.neighbors:
 		if neighbor.occupant:
-			neighborEnemies.append(neighbor)
+			GameEvents.emit_signal("isOccupantFromActivePlayer",neighbor,neighbor.occupant)
+			if(!neighbor.isOccupantFromActivePlayer):
+				neighborEnemies.append(neighbor)
+			neighbor.isOccupantFromActivePlayer = false
+			
+			
 	return neighborEnemies
 
 func hasNeighborEnemies():

@@ -7,7 +7,7 @@ export(Resource) var runtimeData = runtimeData as RuntimeData
 # var b = "text"
 var tileDict ={}
 
-var combatOriginTile = null
+
 signal tileCreated(instance,pos)
 signal allTilesCreated()
 signal switchedTileHighlight(newTile)
@@ -18,6 +18,8 @@ var highlightedCell = Vector2.ZERO
 func _ready():
 	GameEvents.connect("moveCursor",self,"cursorMovement")
 	# warning-ignore:return_value_discarded
+	GameEvents.connect("moveCursorCombat", self, "cursorMovementCombat")
+	
 	GameEvents.connect("highlightedNewCell",self,"switchSelectedTile")
 # warning-ignore:return_value_discarded
 	GameEvents.connect("cellStateSelected", self, "activateCell")
@@ -56,8 +58,6 @@ func cursorMovement(event):
 		elif Input.is_action_pressed("ui_down"):
 			GameEvents.emit_signal("highlightedNewCell",highlightedCell,highlightedCell + Vector2.DOWN)
 
-func cursorMovementCombat(combat):
-	pass
 func switchSelectedTile(oldTile,newTile):
 	if tileDict.has(oldTile) and tileDict.has(newTile):
 		tileDict[oldTile].unselect(tileDict[newTile])
@@ -90,12 +90,9 @@ func structureCalledTest(pos):
 	var testName = tileDict[pos].name
 	print(testName + "'s structure has been activated!")
 
-func unitSpawned(pos,unit):
+func unitSpawned(pos,unit,player):
+
 	tileDict[pos].occupant = unit
-
-
-
-
 
 func _on_TileMap_switchedTileHighlight(newTile):
 	highlightedCell = newTile

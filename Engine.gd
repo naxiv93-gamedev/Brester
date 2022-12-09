@@ -10,11 +10,9 @@ func _ready():
 	GameEvents.connect("cellSelected", self, "activateCell")
 	
 	GameEvents.connect("foundOccupant", self, "foundOccupant")
-	
+	GameEvents.connect("validCombatTile", self, "validCombatTile")
 
-	
 func activateCell():
-
 	state.activateCell()
 
 func _input(event):
@@ -25,7 +23,7 @@ func _input(event):
 func foundOccupant(cell,occupant):
 	if(state.has_method("foundOccupant")):
 		state.foundOccupant(cell,occupant)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
+func validCombatTile(tile):
+	if(state.has_method("validCombatTile")):
+		state.validCombatTile(tile)

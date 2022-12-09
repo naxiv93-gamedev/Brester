@@ -6,10 +6,15 @@ signal finishedTween()
 var list
 var lastTile
 var currentCell
+var tired = false
+var life = 5
+
 func _ready():
 	GameEvents.connect("selectedCancel",self,"clearGData")
 
 func init(pos,colorsArray):
+	var uniqueMaterial = $Sprite.material.duplicate()
+	$Sprite.material = uniqueMaterial
 	var size = $Sprite.texture.get_size()
 	self.position = (pos * size) + (size/2)
 	for i in colorsArray.size():
@@ -23,7 +28,8 @@ func startMove(moveList):
 	
 	startTween(next)
 
-
+func faceLeft():
+	$Sprite.scale.x = -1
 func startTween(tile):
 		tile.occupant = self
 		lastTile = tile
@@ -31,6 +37,11 @@ func startTween(tile):
 		$Tween.start()
 		
 
+func getTired():
+	tired = true
+
+func getRecovered():
+	tired = false
 
 func teleport(cell):
 	self.position = cell.position
@@ -38,19 +49,12 @@ func teleport(cell):
 
 func _on_Tween_tween_completed(object, key):
 	var next = list.getNext(lastTile)
-
-
-
-
 	if next:
 		lastTile.occupant = null
 		startTween(next)
-
 	else:
 		list.getEnd().occupant = self
 		GameEvents.emit_signal("finishedMovement",self,list.getEnd())
-		
-	
 func clearGData():
 	if list:
 		for cell in list.getList():

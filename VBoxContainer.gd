@@ -3,12 +3,14 @@ extends VBoxContainer
 export(Script) var buttonScript
 
 func _ready():
+	GameEvents.connect("validCombatTile",self,"validCombatTile")
 	GameEvents.connect("finishedMovement",self,"finishedMovement")
-
-func addButton(name):
+	GameEvents.connect("tileSelectedCombat", self, "beforeCombat")
+	
+func addButton(name,text):
 	var newButton = Button.new()
 	newButton.set_script(buttonScript)
-	newButton.text = name
+	newButton.text = text
 	newButton.name = name
 	add_child(newButton)
 	newButton.connect("selected",self,"processChoice")
@@ -22,13 +24,21 @@ func clearButtons():
 		remove_child(child)
 
 func finishedMovement(occupant,destination):
-	margin_top = occupant.position.y - 16
-	margin_left = occupant.position.x + 16
-	
-	addButton("Cancel")
-	addButton("Wait")
+	rect_position.y = occupant.position.y - 16
+	rect_position.x  = occupant.position.x + 16
+	addButton("CancelMoving", "Cancel")
+	addButton("WaitMoving" , "Wait")
 	if destination.hasNeighborEnemies():
-		addButton("Attack")
+		addButton("AttackMoving", "Attack")
 	if destination.hasCapturableBase():
-		addButton("Capture")
-	$Cancel.grab_focus()
+		addButton("CaptureMoving", "Capture")
+	$CancelMoving.grab_focus()
+
+func validCombatTile(tile):
+	addButton("SwitchCombat", "Switch target")
+	addButton("CancelCombat", "Cancel movement")
+	addButton("AttackCombat" , "Attack")
+	rect_position.y = tile.position.y - 16
+	rect_position.x  = tile.position.x + 16
+	$SwitchCombat.grab_focus()
+	

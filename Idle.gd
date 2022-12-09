@@ -1,7 +1,7 @@
 extends State
 
-
 signal sendCellData(cell,occupant)
+var isOccupantFromActivePlayer = false
 func input(event):
 
 	if Input.is_action_just_pressed("ui_accept"):
@@ -12,7 +12,13 @@ func activateCell():
 	GameEvents.emit_signal("cellStateSelected","idle")
 
 func foundOccupant(cell,occupant):
-	print(cell.name + "'s occupant has been activated!(idle)")
-	emit_signal("sendCellData",cell,occupant)
-	emit_signal("switchState","Movement")
-
+	GameEvents.emit_signal("isOccupantFromActivePlayer",self,occupant)
+	if isOccupantFromActivePlayer and !occupant.tired:
+		print(cell.name + "'s occupant has been activated!(idle)")
+		emit_signal("sendCellData",cell,occupant)
+		print(cell)
+		print(occupant)
+		emit_signal("switchState","Movement")
+	isOccupantFromActivePlayer = false
+func openMenu():
+	pass

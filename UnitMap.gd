@@ -5,10 +5,6 @@ extends TileMap
 # var a = 2
 # var b = "text"
 export (PackedScene) var unitScene
-export (Resource) var tankStats
-export (Resource) var copterStats
-export (Resource) var antiairStats
-export (Resource) var infantryStats
 
 
 var players = [1,2]
@@ -25,48 +21,14 @@ func init():
 	for unitPos in get_used_cells():
 		var cellTitleID = get_cellv(unitPos)
 		var tileName = tile_set.tile_get_name(cellTitleID)
-		var unitInstance = unitScene.instance()
-		var player = null
-		
-		match tileName:
-			'p1Unit':
-				unitInstance.stats = infantryStats.duplicate()
-				$Player1UnitManager.add_child(unitInstance)
-				player = "player1"
-			'p2Unit':
-				unitInstance.stats = infantryStats.duplicate()
-				$Player2UnitManager.add_child(unitInstance)
-				player = "player2"
-			'P1Bcopter':
-				unitInstance.stats = copterStats.duplicate()
-				$Player1UnitManager.add_child(unitInstance)
-				player = "player1"
-			'P2Bcopter':
-				unitInstance.stats = copterStats.duplicate()
-				$Player2UnitManager.add_child(unitInstance)
-				player = "player2"
-			'P1Antiair':
-				unitInstance.stats = antiairStats.duplicate()
-				$Player1UnitManager.add_child(unitInstance)
-				player = "player1"
-			'P2Antiair':
-				unitInstance.stats = antiairStats.duplicate()
-				$Player2UnitManager.add_child(unitInstance)
-				player = "player2"
-			'P1Tank':
-				print("added")
-				unitInstance.stats = tankStats.duplicate()
-				$Player1UnitManager.add_child(unitInstance)
-				player = "player1"
-			'P2Tank':
-				unitInstance.stats = tankStats.duplicate()
-				$Player2UnitManager.add_child(unitInstance)
-				player = "player2"
-			
-		GameEvents.emit_signal("unitSpawned",unitPos,unitInstance,player)
+		GameEvents.emit_signal("unitSpawned",unitPos,tileName)
 		set_cellv(unitPos,-1)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func _on_Referee_sendUnit(unit):
+	pass # Replace with function body.

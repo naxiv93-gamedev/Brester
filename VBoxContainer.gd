@@ -2,11 +2,15 @@ extends VBoxContainer
 
 export(Script) var buttonScript
 
+var money
+
 func _ready():
+	GameEvents.connect("clearButtons",self,"clearButtons")
 	GameEvents.connect("validCombatTile",self,"validCombatTile")
 	GameEvents.connect("finishedMovement",self,"finishedMovement")
 	GameEvents.connect("tileSelectedCombat", self, "beforeCombat")
-	
+	GameEvents.connect("popUpIdleMenu",self,"idleMenu")
+	GameEvents.connect("structureActivated",self,"spawnUnitMenu")
 func addButton(name,text):
 	var newButton = Button.new()
 	newButton.set_script(buttonScript)
@@ -44,14 +48,27 @@ func validCombatTile(tile):
 	setPosition(tile.position)
 	$SwitchCombat.grab_focus()
 
-func idleMenu():
+func idleMenu(tile):
+	clearButtons()
+	setPosition(tile.position)
+	addButton("CancelIdle","Cancel")
 	addButton("EndTurnIdle", "End Turn")
 
-func spawnUnitMenu():
+func spawnUnitMenu(tile):
+	setPosition(tile.position)
+	GameEvents.emit_signal("askPlayerMoney",self)
 	addButton("Infantry","Infantry - 1000 G")
+	if(money < 1000):
+		$Infantry.disabled = true
 	addButton("Tank","Tank - 6000 G")
-	addButton("Antiair","Infantry - 8000 G")
-	addButton("Bcopter","Infantry - 7000 G")
+	if(money < 6000):
+		$Tank.disabled = true
+	addButton("Bcopter","Battle Copter - 7000 G")
+	if(money < 7000):
+		$Bcopter.disabled = true
+	addButton("Antiair","Antiair - 8000 G")
+	if(money < 8000):
+		$Antiair.disabled = true
 	$Infantry.grab_focus()
 
 func setPosition(pos):

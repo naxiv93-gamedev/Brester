@@ -6,5 +6,5 @@
 [resource]
 script = ExtResource( 1 )
 structureName = "Factory"
-activationSignal = "structureActivated"
+canBeActivated = true
 structureTexture = ExtResource( 2 )

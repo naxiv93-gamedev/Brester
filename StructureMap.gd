@@ -11,9 +11,6 @@ func _ready():
 	call_deferred("init")
 func init():
 	for pos in get_used_cells():
-		
-
-
 		var cellTitleID = get_cellv(pos)
 		var tileName = tile_set.tile_get_name(cellTitleID)
 		var structure = null
@@ -48,8 +45,6 @@ func init():
 				structure = load("res://Database/objects/Structures/HQ.tres")
 				
 				player = "Player2"
-		print(structure)
-		print(player)
 		GameEvents.emit_signal("structureFound",pos,structure,player)
 	queue_free()
 

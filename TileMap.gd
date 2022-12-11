@@ -19,14 +19,13 @@ func _ready():
 	GameEvents.connect("moveCursor",self,"cursorMovement")
 	# warning-ignore:return_value_discarded
 	GameEvents.connect("moveCursorCombat", self, "cursorMovementCombat")
-	
+	GameEvents.connect("factoryActivated",self,"factoryActivated")	
 	GameEvents.connect("highlightedNewCell",self,"switchSelectedTile")
 # warning-ignore:return_value_discarded
 	GameEvents.connect("cellStateSelected", self, "activateCell")
 # warning-ignore:return_value_discarded
 
 # warning-ignore:return_value_discarded
-	GameEvents.connect("unitSpawned",self,"unitSpawned")
 	GameEvents.connect("sendStructure", self, "structureFound")
 
 	$Cursor.init(cell_size)
@@ -91,7 +90,7 @@ func structureCalledTest(pos):
 	var testName = tileDict[pos].name
 	print(testName + "'s structure has been activated!")
 
-func unitSpawned(pos,unit,player):
+func unitSpawned(pos,unit):
 	tileDict[pos].occupant = unit
 
 func _on_TileMap_switchedTileHighlight(newTile):

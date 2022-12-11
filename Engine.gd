@@ -8,18 +8,16 @@ extends StateMachine
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameEvents.connect("cellSelected", self, "activateCell")
-	GameEvents.connect("factoryActivated",self,"factoryActivated")	
 	GameEvents.connect("foundOccupant", self, "foundOccupant")
 	GameEvents.connect("validCombatTile", self, "validCombatTile")
-
+	GameEvents.connect("structureActivated", self, "structureActivated")
 func activateCell():
 	state.activateCell()
 
 func _input(event):
 	if state.has_method("input"):
 		state.input(event)
-	
-	
+
 func foundOccupant(cell,occupant):
 	if(state.has_method("foundOccupant")):
 		state.foundOccupant(cell,occupant)
@@ -27,3 +25,8 @@ func foundOccupant(cell,occupant):
 func validCombatTile(tile):
 	if(state.has_method("validCombatTile")):
 		state.validCombatTile(tile)
+
+func structureActivated(tile):
+	if(state.has_method("structureActivated")):
+		state.structureActivated(tile)
+	

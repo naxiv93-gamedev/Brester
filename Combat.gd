@@ -65,9 +65,6 @@ func selectedAttackCombat():
 	#defender.stats.life -= attacker.stats.mainWeapon.damageDict[defender.stats]
 
 	defender.receiveDamage(attacker.stats.mainWeapon.damageDict[defender.stats.unitName])
-	
-	
-
 	attacker.getTired()
 	emit_signal("switchState","Idle")
 	GameEvents.emit_signal("clearGData")

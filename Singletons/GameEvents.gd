@@ -1,5 +1,13 @@
 extends Node
 
+signal requestPlayerNames(referee)
+signal askPlayerName(beginTurn)
+signal askPlayerIncome(beginTurn)
+signal beginTurn()
+signal editBeginTurnLabels(player,income)
+signal editPlayerUI(player)
+signal clearButtons()
+signal requestPlayerInfoEdit(player,income)
 signal highlightedNewCell(position)
 signal cellSelected()
 signal moveCursor(event)
@@ -23,7 +31,7 @@ signal finishedMovement()
 
 #Idle menu signals
 signal selectedEndTurnIdle()
-
+signal selectedCancelIdle()
 #Moving menu signals
 signal selectedCancelMoving()
 signal selectedWaitMoving()
@@ -37,15 +45,16 @@ signal selectedAttackCombat()
 
 signal popupMenu(occupant,destination)
 
-signal popupIdleMenu()
+signal popUpIdleMenu(tile)
+signal popUpStructureMenu(tile)
 #Structure signals
 signal structureFound(pos,structure,player)
 signal sendStructure(pos,structure,player)
-signal structureActivated(position)
+signal structureActivated(tile)
 signal captureStructure(tile)
 
 #Unit signals
-signal unitSpawned(position,unit,player)
+signal unitSpawned(position,tileName)
 
 
 #Turn management signals
@@ -57,3 +66,17 @@ signal isStructureFromActivePlayer(tile)
 signal beginPlayerTurn(player)
 
 signal startGame()
+
+signal foundWinner(player)
+
+signal backToMenu()
+signal requestWinner(victoryScene)
+	
+signal selectedInfantry()
+signal selectedTank()
+signal selectedAntiair()
+signal selectedBcopter()
+
+signal askPlayerMoney(menu)
+signal unitMenuDespawns()
+signal unitDied(unit)

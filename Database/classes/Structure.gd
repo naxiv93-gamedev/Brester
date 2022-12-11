@@ -1,7 +1,7 @@
 extends Resource
 class_name Structure
 export(String) var structureName
-export(String) var activationSignal
+export(bool) var canBeActivated
 export(Texture) var structureTexture
 export(Resource) onready var stats
 
@@ -14,5 +14,4 @@ func init(colorsArray):
 	sprite.material = uniqueMaterial
 	for i in colorsArray.size():
 		sprite.material.set_shader_param("color" + str(i),Color(colorsArray[i]))
-func activate(pos):
-	GameEvents.emit_signal(activationSignal,pos)
+

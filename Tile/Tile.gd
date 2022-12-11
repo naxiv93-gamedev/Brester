@@ -51,9 +51,14 @@ func idle():
 		if occupant:
 			GameEvents.emit_signal("foundOccupant",self,occupant)
 		elif structure:
-			structure.activate(getPosition())
+			GameEvents.emit_signal("isStructureFromActivePlayer",self)
+			if isStructureFromActivePlayer and structure.canBeActivated:
+				GameEvents.emit_signal("structureActivated",self)
+				isStructureFromActivePlayer = false
+			else:
+				GameEvents.emit_signal("popUpIdleMenu",self)
 		else:
-			GameEvents.emit_signal("popupMenu")
+			GameEvents.emit_signal("popUpIdleMenu",self)
 func movement():
 	if isInRange():
 		if occupant:
@@ -62,8 +67,6 @@ func movement():
 			GameEvents.emit_signal("suitableCell",self)
 	else:
 		GameEvents.emit_signal("cancelMovement")
-
-			
 
 func combat():
 	if isInRange():

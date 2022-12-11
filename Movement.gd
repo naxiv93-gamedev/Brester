@@ -3,7 +3,7 @@ extends State
 var occupant 
 var originCell
 func _ready():
-	
+	GameEvents.emit_signal("clearButtons")
 	GameEvents.connect("cancelMovement",self,"cancelMovement")
 	GameEvents.connect("suitableCell", self,"suitableCell")
 func newState():

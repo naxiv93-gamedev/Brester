@@ -39,7 +39,7 @@ func playExplosion():
 	channel.play()
 
 func playPlayerBGM(player):
-	match player['name']:
+	match player['number']:
 		'player1':
 			playPlayer1BGM()
 		'player2':

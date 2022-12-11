@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bresterMainMenu.ogg-f921124def1fe603cc8af584581e92b4.oggstr"
+
+[deps]
+
+source_file="res://Music/bresterMainMenu.ogg"
+dest_files=[ "res://.import/bresterMainMenu.ogg-f921124def1fe603cc8af584581e92b4.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

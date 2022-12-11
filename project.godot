@@ -75,7 +75,7 @@ _global_script_class_icons={
 [application]
 
 config/name="BresterConflict"
-run/main_scene="res://Map.tscn"
+run/main_scene="res://TransitionManager.tscn"
 config/icon="res://addons/State/icon.png"
 
 [autoload]
@@ -94,6 +94,7 @@ window/stretch/aspect="keep_width"
 [global]
 
 action=false
+escena=false
 
 [input]
 

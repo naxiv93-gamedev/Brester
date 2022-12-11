@@ -12,7 +12,7 @@ func _ready():
 	GameEvents.connect("selectedCancelMoving",self,"selectedCancel")
 	GameEvents.connect("selectedWaitMoving",self,"selectedWait")
 	GameEvents.connect("selectedAttackMoving",self,"selectedAttack")
-	GameEvents.connect("selectedCaptureMoving",self,"selectedAttack")
+	GameEvents.connect("selectedCaptureMoving",self,"selectedCapture")
 func finishedMovement(occupant,destination):
 	endTile = destination
 	GameEvents.emit_signal("popUpMenu")
@@ -34,6 +34,5 @@ func selectedAttack():
 
 func selectedCapture():
 	endTile.occupant.getTired()
-	pass
-
-
+	GameEvents.emit_signal("captureStructure",endTile)
+	emit_signal("switchState","Idle")

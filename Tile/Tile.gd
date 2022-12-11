@@ -9,6 +9,7 @@ var occupant
 var cost = 1
 var mapPos
 var isOccupantFromActivePlayer = false
+var isStructureFromActivePlayer = false
 func init(tile):
 		var size = $Sprite.texture.get_size()
 		self.position = (tile * size) + (size/2)
@@ -52,7 +53,7 @@ func idle():
 		elif structure:
 			structure.activate(getPosition())
 		else:
-			print(name + " has been activated!")
+			GameEvents.emit_signal("popupMenu")
 func movement():
 	if isInRange():
 		if occupant:
@@ -69,11 +70,9 @@ func combat():
 		GameEvents.emit_signal("validCombatTile", self)
 		
 func addStructure(structure):
-	structure = load("res://Database/objects/Structures/Factory.tres")
 	self.structure = structure
-	var structureSprite = Sprite.new()
+	var structureSprite = structure.sprite
 	structureSprite.name = "StructureSprite"
-	structureSprite.texture = structure.structureTexture
 	add_child(structureSprite)
 
 func addUnit(unit):
@@ -95,12 +94,16 @@ func getNeighborEnemies():
 			if(!neighbor.isOccupantFromActivePlayer):
 				neighborEnemies.append(neighbor)
 			neighbor.isOccupantFromActivePlayer = false
-			
-			
 	return neighborEnemies
 
 func hasNeighborEnemies():
 	return getNeighborEnemies().size() != 0
 func hasCapturableBase():
-	return structure
-
+	if structure:
+		GameEvents.emit_signal("isStructureFromActivePlayer",self)
+		return !isStructureFromActivePlayer
+	else:
+		return false
+func switchStructureColors(colorsArray):
+	for i in colorsArray.size():
+		$StructureSprite.material.set_shader_param("color" + str(i),Color(colorsArray[i]))

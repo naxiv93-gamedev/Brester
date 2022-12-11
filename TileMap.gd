@@ -24,9 +24,10 @@ func _ready():
 # warning-ignore:return_value_discarded
 	GameEvents.connect("cellStateSelected", self, "activateCell")
 # warning-ignore:return_value_discarded
-	GameEvents.connect("structureActivated",self,"structureCalledTest")
+
 # warning-ignore:return_value_discarded
 	GameEvents.connect("unitSpawned",self,"unitSpawned")
+	GameEvents.connect("sendStructure", self, "structureFound")
 
 	$Cursor.init(cell_size)
 	for pos in get_used_cells():
@@ -83,7 +84,7 @@ func activateCell(script):
 
 	tileDict[highlightedCell].call(script)
 
-func _on_StructureMap_structureFound(pos,structure):
+func structureFound(pos,structure,player):
 	tileDict[pos].addStructure(structure)
 
 func structureCalledTest(pos):
@@ -91,7 +92,6 @@ func structureCalledTest(pos):
 	print(testName + "'s structure has been activated!")
 
 func unitSpawned(pos,unit,player):
-
 	tileDict[pos].occupant = unit
 
 func _on_TileMap_switchedTileHighlight(newTile):

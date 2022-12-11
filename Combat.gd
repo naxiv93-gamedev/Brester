@@ -2,17 +2,19 @@ extends State
 
 signal requestUnit(combat)
 signal resetMovement()
-var unit = null
+var attacker = null
 var cell = null
 var enemies  = null
 var inMenu = false
+var defender = null
+
 func _ready():
 	GameEvents.connect("selectedSwitchCombat",self,"selectedSwitchCombat")
 	GameEvents.connect("selectedCancelCombat",self,"selectedCancelCombat")
 	GameEvents.connect("selectedAttackCombat",self,"selectedAttackCombat")
 func newState():
 	emit_signal("requestUnit",self)
-	cell = unit.list.getEnd()
+	cell = attacker.list.getEnd()
 	enemies = cell.getNeighborEnemies()
 	for enemy in enemies:
 		enemy.inRange()
@@ -20,7 +22,7 @@ func newState():
 
 func findTile(vector2):
 	for tile in enemies:
-		var direction = Vector2(sign(tile.position.x - unit.position.x),sign(tile.position.y - unit.position.y))
+		var direction = Vector2(sign(tile.position.x - attacker.position.x),sign(tile.position.y - attacker.position.y))
 		if vector2 == direction:
 			return tile
 
@@ -51,6 +53,7 @@ func getNearestTile(globalMousePosition):
 
 func validCombatTile(tile):
 	inMenu = true
+	defender = tile.occupant
 	GameEvents.emit_signal("combatMenu")
 
 func selectedCancelCombat():
@@ -58,5 +61,14 @@ func selectedCancelCombat():
 	emit_signal("resetMovement")
 func selectedSwitchCombat():
 	inMenu = false 
-func selectedAttack():
+func selectedAttackCombat():
+	#defender.stats.life -= attacker.stats.mainWeapon.damageDict[defender.stats]
+
+	defender.receiveDamage(attacker.stats.mainWeapon.damageDict[defender.stats.unitName])
+	
+	
+
+	attacker.getTired()
+	emit_signal("switchState","Idle")
+	GameEvents.emit_signal("clearGData")
 	inMenu = false

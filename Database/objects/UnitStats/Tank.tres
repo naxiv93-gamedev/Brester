@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://Database/classes/UnitStats.gd" type="Script" id=1]
+[ext_resource path="res://Database/objects/Weapons/TankCannon.tres" type="Resource" id=2]
+[ext_resource path="res://Assets/tank.png" type="Texture" id=3]
+
+[resource]
+script = ExtResource( 1 )
+unitName = "Tank"
+texture = ExtResource( 3 )
+mainWeapon = ExtResource( 2 )
+movementType = 3
+movement_range = 6
+vision_range = 3
+canCapture = false
+canRestock = false
+canCarry = false
+max_units_carry = 0
+max_fuel = 99
+cost = 0
+info = ""

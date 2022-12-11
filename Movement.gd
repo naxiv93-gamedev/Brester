@@ -47,5 +47,5 @@ func _on_Moving_resetMovement():
 
 
 func _on_Combat_requestUnit(combat):
-	combat.unit = occupant
+	combat.attacker = occupant
 

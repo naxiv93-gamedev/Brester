@@ -2,6 +2,9 @@ extends State
 
 signal sendCellData(cell,occupant)
 var isOccupantFromActivePlayer = false
+
+func newState():
+	pass
 func input(event):
 
 	if Input.is_action_just_pressed("ui_accept"):

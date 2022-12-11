@@ -7,7 +7,7 @@ var list
 var lastTile
 var currentCell
 var tired = false
-var life = 5
+
 
 func _ready():
 	GameEvents.connect("selectedCancel",self,"clearGData")
@@ -15,7 +15,9 @@ func _ready():
 func init(pos,colorsArray):
 	var uniqueMaterial = $Sprite.material.duplicate()
 	$Sprite.material = uniqueMaterial
+	
 	var size = $Sprite.texture.get_size()
+	$Sprite.texture = stats.texture
 	self.position = (pos * size) + (size/2)
 	for i in colorsArray.size():
 		$Sprite.material.set_shader_param("color" + str(i),Color(colorsArray[i]))
@@ -38,9 +40,11 @@ func startTween(tile):
 		
 
 func getTired():
+	modulate = "#999999"
 	tired = true
 
 func getRecovered():
+	modulate = "#ffffff"
 	tired = false
 
 func teleport(cell):
@@ -62,3 +66,12 @@ func clearGData():
 				cell.occupant = null
 	list = null
 	lastTile = null
+
+
+func receiveDamage(damage):
+	stats.life -=  damage
+	$Control.showDamage(stats.life)
+	if stats.life <= 0:
+		GameEvents.emit_signal("unitDied",self)
+		queue_free()
+	

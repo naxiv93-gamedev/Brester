@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/bresterMainMenu (mp3cut.net).mp3-da1e868bd3f2ee8e0dbc018c04e5dbdb.mp3str"
+
+[deps]
+
+source_file="res://Images/bresterMainMenu (mp3cut.net).mp3"
+dest_files=[ "res://.import/bresterMainMenu (mp3cut.net).mp3-da1e868bd3f2ee8e0dbc018c04e5dbdb.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

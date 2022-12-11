@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Database/classes/Weapon.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+name = ""
+minRange = 1
+maxRange = 1
+maxAmmo = 0
+damageToInfantry = 70
+damageToTanks = 30
+damageToBcopter = 90
+damageToAntiair = 30

@@ -8,7 +8,7 @@ extends StateMachine
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameEvents.connect("cellSelected", self, "activateCell")
-	
+	GameEvents.connect("factoryActivated",self,"factoryActivated")	
 	GameEvents.connect("foundOccupant", self, "foundOccupant")
 	GameEvents.connect("validCombatTile", self, "validCombatTile")
 

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://gridlessDB_data/UnitsTerrain/classes/UnitStatss.gd" type="Script" id=1]
+[ext_resource path="res://gridlessDB_data/UnitsTerrain/objects/Item2.tres" type="Resource" id=2]
+
+[resource]
+script = ExtResource( 1 )
+unit_name = "Lander"
+movementtype = 0
+movement_range = 6
+vision_range = 8
+capture = 0
+restock = 0
+attack_type = 0
+info = ""
+max_fuel = 99
+cost = 12000
+carrier = 1
+max_units_carry = 2
+secondary_weapon = ExtResource( 2 )

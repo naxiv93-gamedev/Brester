@@ -1,0 +1,22 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://gridlessDB_data/UnitsTerrain/classes/UnitStatss.gd" type="Script" id=1]
+[ext_resource path="res://gridlessDB_data/UnitsTerrain/objects/Item1.tres" type="Resource" id=2]
+[ext_resource path="res://gridlessDB_data/UnitsTerrain/objects/Item2.tres" type="Resource" id=3]
+
+[resource]
+script = ExtResource( 1 )
+unit_name = "Fighter"
+movementtype = 0
+movement_range = 9
+vision_range = 8
+capture = 0
+restock = 0
+attack_type = 0
+info = ""
+max_fuel = 99
+cost = 20000
+carrier = 0
+max_units_carry = 0
+primary_weapon = ExtResource( 2 )
+secondary_weapon = ExtResource( 3 )

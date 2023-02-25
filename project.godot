@@ -55,9 +55,14 @@ _global_script_classes=[ {
 "path": "res://Database/classes/UnitStats.gd"
 }, {
 "base": "Resource",
+"class": "UnitStatss",
+"language": "GDScript",
+"path": "res://gridlessDB_data/UnitsTerrain/classes/UnitStatss.gd"
+}, {
+"base": "Resource",
 "class": "Weapon",
 "language": "GDScript",
-"path": "res://Database/classes/Weapon.gd"
+"path": "res://gridlessDB_data/UnitsTerrain/classes/Weapon.gd"
 } ]
 _global_script_class_icons={
 "Enums": "",
@@ -69,13 +74,14 @@ _global_script_class_icons={
 "Unit": "",
 "UnitPath": "",
 "UnitStats": "",
+"UnitStatss": "",
 "Weapon": ""
 }
 
 [application]
 
 config/name="BresterConflict"
-run/main_scene="res://TransitionManager.tscn"
+run/main_scene="res://Entities/TransitionManager/TransitionManager.tscn"
 config/icon="res://addons/State/icon.png"
 
 [autoload]
